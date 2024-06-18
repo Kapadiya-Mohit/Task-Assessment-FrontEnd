@@ -1,17 +1,13 @@
 import { DOCUMENT } from '@angular/common';
-import {
-  Component,
-  ElementRef,
-  HostListener,
-  Inject,
-  OnInit,
-} from '@angular/core';
-import { MatIconModule } from '@angular/material/icon';
+import { Component, ElementRef, HostListener, Inject } from '@angular/core';
+
+/** Material dependencies */
+import { MaterialModule } from '../../module/material/material.module';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [MatIconModule],
+  imports: [MaterialModule],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
 })
@@ -36,7 +32,7 @@ export class HeaderComponent {
    * @memberof HeaderComponent
    */
   @HostListener('window:resize', ['$event'])
-  onResize(event: any): void {
+  onResize(): void {
     this.checkScreenSize();
     if (!this.isMobileView && this.isSidebarVisible) {
       this.hideSidebar();

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -6,35 +6,18 @@ import {
   FormsModule,
   ReactiveFormsModule,
 } from '@angular/forms';
-import { Router } from '@angular/router';
 
-import { MatInputModule } from '@angular/material/input';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatButtonModule } from '@angular/material/button';
-import { MatSelectModule } from '@angular/material/select';
-import {
-  MatDialogActions,
-  MatDialogContent,
-  MatDialogClose,
-  MatDialogTitle,
-  MatDialogRef,
-} from '@angular/material/dialog';
+import { UserService } from '../../../shared/services/user.service';
+import { ToastrService } from 'ngx-toastr';
+
+/** Material dependencies */
+import { MaterialModule } from '../../../shared/module/material/material.module';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-user',
   standalone: true,
-  imports: [
-    FormsModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatButtonModule,
-    ReactiveFormsModule,
-    MatSelectModule,
-    MatDialogContent,
-    MatDialogActions,
-    MatDialogClose,
-    MatDialogTitle,
-  ],
+  imports: [MaterialModule, FormsModule, ReactiveFormsModule],
   templateUrl: './user.component.html',
   styleUrl: './user.component.scss',
 })
@@ -43,11 +26,17 @@ export class UserComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    public dialogRef: MatDialogRef<UserComponent>
+    public dialogRef: MatDialogRef<UserComponent>,
+    private userService: UserService,
+    private toast: ToastrService,
+    @Inject(MAT_DIALOG_DATA) private userId: string
   ) {}
 
   ngOnInit(): void {
     this.initUserForm();
+    if (this.userId) {
+      this.getUserById();
+    }
   }
 
   /**
@@ -65,14 +54,82 @@ export class UserComponent implements OnInit {
 
   /**
    *
-   *Save user form
-   * @memberof UpdateUserComponent
+   * Get user by id
+   * @memberof UserComponent
    */
-  saveUser(): void {
-    this.userForm.markAllAsTouched();
-    if (this.userForm.invalid) return;
+  getUserById(): void {
+    this.userService.getUserById(this.userId).subscribe({
+      next: (user) => {
+        if (user) {
+          this.userForm.patchValue({
+            title: user.title,
+            description: user.description,
+            status: user.status,
+          });
+        }
+      },
+      error: (err) => console.log(err),
+    });
   }
 
+  /**
+   *
+   *Save or Update user based on id
+   * @memberof UpdateUserComponent
+   */
+  saveOrUpdateUser(): void {
+    this.userForm.markAllAsTouched();
+    if (this.userForm.invalid) return;
+    if (this.userId) {
+      this.update();
+    } else {
+      this.save();
+    }
+  }
+
+  /**
+   *
+   * Save user
+   * @memberof UserComponent
+   */
+  save(): void {
+    this.userService.saveUser(this.userForm.value).subscribe({
+      next: (res) => {
+        if (res) {
+          this.toast.success('User save successfully', 'Success', {
+            timeOut: 2000,
+          });
+          this.dialogRef.close(res);
+        }
+      },
+      error: (err) => this.toast.error(err),
+    });
+  }
+
+  /**
+   *
+   * Update user
+   * @memberof UserComponent
+   */
+  update(): void {
+    this.userService.updateUser(this.userForm.value, this.userId).subscribe({
+      next: (res) => {
+        if (res) {
+          this.toast.success('User updated successfully', 'Success', {
+            timeOut: 2000,
+          });
+          this.dialogRef.close(res);
+        }
+      },
+      error: (err) => this.toast.error(err),
+    });
+  }
+
+  /**
+   *
+   * Cancle add user and close dialog
+   * @memberof UserComponent
+   */
   cancelAddUser(): void {
     this.dialogRef.close();
   }
