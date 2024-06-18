@@ -1,0 +1,8 @@
+<h3 mat-dialog-title class="d-flex justify-content-center align-items-center mt-10">Confirmation</h3>
+<mat-dialog-content>
+    <span>Are you sure you want to delete it ?</span>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-raised-button color="white" (click)="closeDialog(false)">Cancel</button>
+    <button mat-raised-button class="bg-dark text-white" (click)="closeDialog(true)">Save</button>
+</mat-dialog-actions>
