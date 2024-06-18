@@ -1,0 +1,36 @@
+<nav class="navbar bg-dark navbar-expand-lg header justify-content-between box-shadow">
+    <a class="navbar-brand ml-30" href="#">
+        <img src="/assets/images/logo.png" class="width-80 rounded">
+    </a>
+    <div>
+        <button class="navbar-toggler mr-30 bg-white" type="button" data-toggle="collapse"
+            data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false"
+            aria-label="Toggle navigation" (click)="toggleSidebar()">
+            <mat-icon>menu</mat-icon>
+        </button>
+        <!-- In PC view -->
+        <div class="collapse navbar-collapse mr-30" id="navbarNavDropdown">
+            <ul class="navbar-nav navbar-right-wrap">
+                <li class="nav-item">
+                    <a class="nav-link">
+                        <img src="../../../assets/images/avatar.jpg" class="width-45 rounded">
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- In Mobile View -->
+<div id="sidebar" class="sidebar bg-dark position-fixed top-0 right-0 h-100 p-20">
+    <div>
+        <mat-icon class="fw-bold text-white">close</mat-icon>
+    </div>
+    <ul class="navbar-nav mt-30 gap-20">
+        @for (item of sidebarLinks; track $index) {
+        <li class="nav-item bg-white text-white p-10">
+            <a class="nav-link p-10 text-dark" href="#">{{item}}</a>
+        </li>
+        }
+    </ul>
+</div>

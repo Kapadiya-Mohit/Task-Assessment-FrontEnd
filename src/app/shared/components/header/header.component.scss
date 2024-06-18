@@ -1,0 +1,46 @@
+/* Navbar Styles */
+.navbar {
+  padding-top: 0.625rem;
+  padding-bottom: 0.625rem;
+  min-height: 53px;
+  margin-bottom: 20px;
+  box-shadow: 0 0 20px rgba(300, 0, 0, 0.1);
+
+  & .icon {
+    font-size: 20px;
+  }
+
+  & .navbar-right-wrap {
+    display: flex;
+    align-items: center;
+  }
+}
+
+/* Sidebar Styles */
+.sidebar {
+  opacity: 1;
+  right: 0;
+  transform: translateX(100%);
+  transition: right 0.3s ease;
+  z-index: 1111;
+
+  & .navbar-nav {
+    & .nav-item {
+      font-weight: 700;
+      border-radius: 10px;
+    }
+  }
+
+  & .icon {
+    font-size: 40px;
+  }
+}
+
+.show-sidebar {
+  transform: translateX(0);
+}
+
+.mat-badge-medium.mat-badge-overlap .mat-badge-content {
+  font-size: 10px;
+  background-color: var(--red);
+}
