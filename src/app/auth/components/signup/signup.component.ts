@@ -8,6 +8,8 @@ import {
 } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MaterialModule } from '../../../shared/module/material/material.module';
+import { AuthService } from '../../../shared/services/auth.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-signup',
@@ -19,7 +21,12 @@ import { MaterialModule } from '../../../shared/module/material/material.module'
 export class SignupComponent implements OnInit {
   signupForm!: FormGroup;
 
-  constructor(private fb: FormBuilder, private router: Router) {}
+  constructor(
+    private fb: FormBuilder,
+    private router: Router,
+    private authService: AuthService,
+    private toast: ToastrService
+  ) {}
 
   ngOnInit(): void {
     this.initUserForm();
@@ -35,8 +42,15 @@ export class SignupComponent implements OnInit {
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
-      contact: ['', Validators.required],
-      password: ['', Validators.required],
+      password: [
+        '',
+        [
+          Validators.required,
+          Validators.pattern(
+            '(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-zd$@$!%*?&].{8,}'
+          ),
+        ],
+      ],
     });
   }
 
@@ -48,6 +62,17 @@ export class SignupComponent implements OnInit {
   save(): void {
     this.signupForm.markAllAsTouched();
     if (this.signupForm.invalid) return;
+    this.authService.signUp(this.signupForm.value).subscribe({
+      next: (res) => {
+        if (res) {
+          this.toast.success('User register successfully', 'Success', {
+            timeOut: 2000,
+          });
+          this.router.navigate(['/']);
+        }
+      },
+      error: (err) => this.toast.error(err),
+    });
   }
 
   /**

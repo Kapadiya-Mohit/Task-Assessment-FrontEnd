@@ -3,7 +3,8 @@ import { Component, ElementRef, HostListener, Inject } from '@angular/core';
 
 /** Material dependencies */
 import { MaterialModule } from '../../module/material/material.module';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -15,15 +16,20 @@ import { RouterModule } from '@angular/router';
 export class HeaderComponent {
   isMobileView: boolean = false;
   isSidebarVisible: boolean = false;
-  sidebarLinks = ['Login', 'Signup'];
-
+  sidebarLinks = ['Login', 'Signup', 'Logout'];
+  isLoggedUser: boolean = false;
   constructor(
     @Inject(DOCUMENT) private document: Document,
-    private elementRef: ElementRef
+    private elementRef: ElementRef,
+    private authService: AuthService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
     this.checkScreenSize();
+    this.authService.$isLogginUser.subscribe((res) => {
+      this.isLoggedUser = res;
+    });
   }
 
   /**
@@ -118,5 +124,16 @@ export class HeaderComponent {
       }
     }
     return '300px';
+  }
+
+  /**
+   *
+   * Remove user from localStorage
+   * @memberof HeaderComponent
+   */
+  logoutUser(): void {
+    this.authService.logout();
+    this.authService.$isLogginUser.next(false);
+    this.router.navigate(['/']);
   }
 }
