@@ -1,0 +1,46 @@
+<div class="d-flex align-items-center justify-content-center login-wrap">
+    <mat-card class="w-75 card">
+        <mat-card-header class="d-flex align-items-center justify-content-center">
+            <mat-card-title> Login</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <form class="w-100 p-10 d-flex justify-content-center align-items-center flex-column"
+                [formGroup]="loginForm">
+                <!-- Email -->
+                <mat-form-field class="form-field w-75 mt-10" appearance="outline">
+                    <mat-label>Email</mat-label>
+                    <input matInput placeholder="Enter Email" formControlName="email">
+                    @if (
+                    hasError('email','required')
+                    ) {
+                    <mat-error>
+                        <mat-icon class="error-icon">error</mat-icon>
+                        Email is required</mat-error>
+                    }
+                    @else if (
+                    hasError('email','email')
+                    ) {
+                    <mat-error>
+                        <mat-icon class="error-icon">error</mat-icon>Please enter an valid email</mat-error>
+                    }
+                </mat-form-field>
+
+                <!-- password -->
+                <mat-form-field class="form-field w-75 mt-10" appearance="outline">
+                    <mat-label>Password</mat-label>
+                    <input matInput placeholder="Enter Password" formControlName="password">
+                    @if (
+                    hasError('password','required')
+                    ) {
+                    <mat-error>
+                        <mat-icon class="error-icon">error</mat-icon>
+                        Password is required</mat-error>
+                    }
+                </mat-form-field>
+                <div class="w-75 mt-10 d-flex justify-content-end button-wrap">
+                    <button mat-raised-button class="bg-dark text-white" (click)="save()">Save</button>
+                </div>
+            </form>
+        </mat-card-content>
+    </mat-card>
+</div>

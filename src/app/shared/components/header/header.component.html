@@ -12,7 +12,11 @@
         <div class="collapse navbar-collapse mr-30" id="navbarNavDropdown">
             <ul class="navbar-nav navbar-right-wrap">
                 <li class="nav-item">
-                    <a class="nav-link">
+                    <a class="nav-link d-flex align-items-center gap-10">
+                        <div class="mr-2 d-flex align-items-center gap-10">
+                            <button mat-raised-button color="white" [routerLink]="['/']">Login</button>
+                            <button mat-raised-button color="white" [routerLink]="['/signup']">Signup</button>
+                        </div>
                         <img src="../../../assets/images/avatar.jpg" class="width-45 rounded">
                     </a>
                 </li>

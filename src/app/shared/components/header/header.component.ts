@@ -3,18 +3,19 @@ import { Component, ElementRef, HostListener, Inject } from '@angular/core';
 
 /** Material dependencies */
 import { MaterialModule } from '../../module/material/material.module';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [MaterialModule],
+  imports: [MaterialModule, RouterModule],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
 })
 export class HeaderComponent {
   isMobileView: boolean = false;
   isSidebarVisible: boolean = false;
-  sidebarLinks = ['Home', 'About', 'Contact Us', 'Notification', 'Languages'];
+  sidebarLinks = ['Login', 'Signup'];
 
   constructor(
     @Inject(DOCUMENT) private document: Document,
