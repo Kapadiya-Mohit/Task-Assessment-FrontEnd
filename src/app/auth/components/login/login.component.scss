@@ -1,13 +1,43 @@
+/* Ensure the card is responsive */
+.card {
+    max-width: 100%;
+    width: 75%;
+    margin: 0 auto;
+}
+
+/* Adjust the form fields and card content on small screens */
 @media (max-width: 600px) {
-  .mat-mdc-form-field {
-    width: 90% !important;
-  }
+    .card {
+        width: 95%;
+    }
 
-  .button-wrap {
-    width: 90% !important;
-  }
+    .form-field {
+        width: 100% !important;
+        margin-top: 20px;
+    }
 
-  .card {
-    width: 90% !important;
-  }
+    .button-wrap {
+        width: 100% !important;
+        margin-top: 40px !important;
+    }
+
+    .error-icon {
+        vertical-align: middle;
+    }
+
+    mat-error {
+        white-space: normal !important;
+        word-wrap: break-word !important;
+        display: block;
+        line-height: 1.2;
+    }
+
+    mat-card-content {
+        padding-bottom: 16px;
+    }
+
+    .card {
+        padding: 16px;
+        overflow-y: auto;
+    }
 }

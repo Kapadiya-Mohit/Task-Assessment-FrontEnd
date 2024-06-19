@@ -8,6 +8,8 @@ import {
   Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthService } from '../../../shared/services/auth.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
@@ -19,7 +21,12 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit {
   loginForm!: FormGroup;
 
-  constructor(private fb: FormBuilder, private router: Router) {}
+  constructor(
+    private fb: FormBuilder,
+    private router: Router,
+    private authService: AuthService,
+    private toast: ToastrService
+  ) {}
 
   ngOnInit(): void {
     this.initUserForm();
@@ -33,7 +40,15 @@ export class LoginComponent implements OnInit {
   initUserForm(): void {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
-      password: ['', Validators.required],
+      password: [
+        '',
+        [
+          Validators.required,
+          Validators.pattern(
+            '(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-zd$@$!%*?&].{8,}'
+          ),
+        ],
+      ],
     });
   }
 
@@ -45,6 +60,19 @@ export class LoginComponent implements OnInit {
   save(): void {
     this.loginForm.markAllAsTouched();
     if (this.loginForm.invalid) return;
+    this.authService.login(this.loginForm.value).subscribe({
+      next: (res) => {
+        if (res) {
+          this.toast.success('User Login successfully', 'Success', {
+            timeOut: 2000,
+          });
+          this.authService.setJWTToken(res.token);
+          this.authService.$isLogginUser.next(true);
+          this.router.navigate(['/user']);
+        }
+      },
+      error: (err) => this.toast.error(err.error.message),
+    });
   }
 
   /**

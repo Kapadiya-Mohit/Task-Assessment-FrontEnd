@@ -1,10 +1,10 @@
 <div class="d-flex align-items-center justify-content-center">
-    <mat-card class="w-75 card">
+    <mat-card class="w-75 card mx-auto">
         <mat-card-header class="d-flex align-items-center justify-content-center">
             <mat-card-title> Signup</mat-card-title>
         </mat-card-header>
         <mat-card-content>
-            <form class="w-100 p-10 d-flex justify-content-center align-items-center flex-column"
+            <form class="w-100 p-10 gap-8 d-flex justify-content-center align-items-center flex-column"
                 [formGroup]="signupForm">
                 <!-- firstName -->
                 <mat-form-field class="form-field w-75" appearance="outline">
@@ -33,7 +33,7 @@
                     }
                 </mat-form-field>
                 <!-- Email -->
-                <mat-form-field class="form-field w-75 mt-10" appearance="outline">
+                <mat-form-field class="form-field w-75" appearance="outline">
                     <mat-label>Email</mat-label>
                     <input matInput placeholder="Enter Email" formControlName="email">
                     @if (
@@ -52,7 +52,7 @@
                 </mat-form-field>
 
                 <!-- password -->
-                <mat-form-field class="form-field w-75 mt-10" appearance="outline">
+                <mat-form-field class="form-field w-75" appearance="outline">
                     <mat-label>Password</mat-label>
                     <input matInput placeholder="Enter Password" formControlName="password">
                     @if (
@@ -61,6 +61,15 @@
                     <mat-error>
                         <mat-icon class="error-icon">error</mat-icon>
                         Password is required</mat-error>
+                    }
+                    @else if (
+                    hasError('password','pattern')
+                    ) {
+                    <mat-error>
+                        <mat-icon class="error-icon">error</mat-icon>
+                        Password should be At least 8 characters in length,Lowercase letters,Uppercase letters,
+                        Numbers and Special characters
+                    </mat-error>
                     }
                 </mat-form-field>
                 <div class="w-75 mt-10 d-flex justify-content-end button-wrap">

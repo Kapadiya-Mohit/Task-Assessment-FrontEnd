@@ -14,8 +14,12 @@
                 <li class="nav-item">
                     <a class="nav-link d-flex align-items-center gap-10">
                         <div class="mr-2 d-flex align-items-center gap-10">
+                            @if(isLoggedUser){
+                            <button mat-raised-button color="white" (click)="logoutUser()">Logout</button>
+                            } @else {
                             <button mat-raised-button color="white" [routerLink]="['/']">Login</button>
                             <button mat-raised-button color="white" [routerLink]="['/signup']">Signup</button>
+                            }
                         </div>
                         <img src="../../../assets/images/avatar.jpg" class="width-45 rounded">
                     </a>
