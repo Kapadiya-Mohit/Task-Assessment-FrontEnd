@@ -13,6 +13,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatCardModule } from '@angular/material/card';
 
 @NgModule({
   declarations: [],
@@ -29,6 +30,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     MatDialogTitle,
     MatTableModule,
     MatPaginatorModule,
+    MatCardModule,
   ],
   exports: [
     MatDialogActions,
@@ -42,6 +44,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     MatDialogTitle,
     MatTableModule,
     MatPaginatorModule,
+    MatCardModule,
   ],
 })
 export class MaterialModule {}
