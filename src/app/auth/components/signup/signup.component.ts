@@ -29,15 +29,15 @@ export class SignupComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.initUserForm();
+    this.initSignupForm();
   }
 
   /**
    *
-   *Initialization of user form
+   *Initialization of signup form
    * @memberof SignupComponent
    */
-  initUserForm(): void {
+  initSignupForm(): void {
     this.signupForm = this.fb.group({
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
@@ -56,7 +56,7 @@ export class SignupComponent implements OnInit {
 
   /**
    *
-   *Save user form
+   *Save signup form
    * @memberof SignupComponent
    */
   save(): void {

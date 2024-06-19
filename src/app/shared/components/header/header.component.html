@@ -1,4 +1,4 @@
-<nav class="navbar bg-dark navbar-expand-lg header justify-content-between box-shadow">
+<nav class="navbar navbar-expand-lg header justify-content-between box-shadow">
     <a class="navbar-brand ml-30" href="#">
         <img src="/assets/images/logo.png" class="width-80 rounded">
     </a>
@@ -15,7 +15,7 @@
                     <a class="nav-link d-flex align-items-center gap-10">
                         <div class="mr-2 d-flex align-items-center gap-10">
                             @if(isLoggedUser){
-                            <button mat-raised-button color="white" (click)="logoutUser()">Logout</button>
+                                <mat-icon (click)="logoutUser()" class="text-white pointer">exit_to_app</mat-icon>
                             } @else {
                             <button mat-raised-button color="white" [routerLink]="['/']">Login</button>
                             <button mat-raised-button color="white" [routerLink]="['/signup']">Signup</button>
@@ -35,9 +35,16 @@
         <mat-icon class="fw-bold text-white">close</mat-icon>
     </div>
     <ul class="navbar-nav mt-30 gap-20">
-        @for (item of sidebarLinks; track $index) {
-        <li class="nav-item bg-white text-white p-10">
-            <a class="nav-link p-10 text-dark" href="#">{{item}}</a>
+        @if(isLoggedUser){
+        <li class="nav-item bg-white text-white p-10" (click)="logoutUser()">
+            <a class="nav-link p-10 text-dark">Logout</a>
+        </li>
+        } @else {
+        <li class="nav-item bg-white text-white p-10" [routerLink]="['/']">
+            <a class="nav-link p-10 text-dark">Login</a>
+        </li>
+        <li class="nav-item bg-white text-white p-10" [routerLink]="['/signup']">
+            <a class="nav-link p-10 text-dark">Signup</a>
         </li>
         }
     </ul>

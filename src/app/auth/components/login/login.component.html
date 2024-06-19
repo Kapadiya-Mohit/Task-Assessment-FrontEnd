@@ -1,8 +1,6 @@
-<div class="d-flex align-items-center justify-content-center login-wrap">
-    <mat-card class="w-75 card">
-        <mat-card-header class="d-flex align-items-center justify-content-center">
-            <mat-card-title> Login</mat-card-title>
-        </mat-card-header>
+<div class="d-flex align-items-center justify-content-center justify-content-lg-start  auth-wrap flex-column">
+    <h1 class="mb-10 text-white">Sign In</h1>
+    <mat-card class="w-50 card">
         <mat-card-content>
             <form class="w-100 gap-10 p-10 d-flex justify-content-center align-items-center flex-column"
                 [formGroup]="loginForm">
@@ -47,9 +45,10 @@
                     }
                 </mat-form-field>
                 <div class="w-75 mt-10 d-flex justify-content-end button-wrap">
-                    <button mat-raised-button class="bg-dark text-white" (click)="save()">Save</button>
+                    <button mat-raised-button class="btn text-white" (click)="save()">Save</button>
                 </div>
             </form>
+            <p class="text-center">New User ? <a href="#" [routerLink]="['/signup']">Create User</a></p>
         </mat-card-content>
     </mat-card>
 </div>

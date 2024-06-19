@@ -3,50 +3,50 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSort } from '@angular/material/sort';
-import { UserComponent } from '../user/user.component';
-import { UserService } from '../../../shared/services/user.service';
-import { User } from '../../../shared/modal/user.modal';
 import { ConfirmationDialogComponent } from '../../../shared/components/confirmation-dialog/confirmation-dialog.component';
 import { ToastrService } from 'ngx-toastr';
 
 /** Material dependencies */
 import { MaterialModule } from '../../../shared/module/material/material.module';
+import { TaskComponent } from '../task/task.component';
+import { TaskService } from '../../../shared/services/task.service';
+import { Task } from '../../../shared/modal/task.modal';
 
 @Component({
-  selector: 'app-user-list',
+  selector: 'app-task-list',
   standalone: true,
   imports: [MaterialModule],
-  templateUrl: './user-list.component.html',
-  styleUrl: './user-list.component.scss',
+  templateUrl: './task-list.component.html',
+  styleUrl: './task-list.component.scss',
 })
-export class UserListComponent implements OnInit {
+export class TaskListComponent implements OnInit {
   displayedColumns: string[] = ['title', 'description', 'status', 'action'];
   dataSource: any = [];
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
-  users!: User[];
+  tasks!: Task[];
 
   constructor(
     public dialog: MatDialog,
-    private userService: UserService,
+    private taskService: TaskService,
     private toast: ToastrService
   ) {}
 
   ngOnInit(): void {
-    this.getUsers();
+    this.getTasks();
   }
 
   /**
    *
-   * Get users list
-   * @memberof UserListComponent
+   * Get tasks list
+   * @memberof TaskListComponent
    */
-  getUsers(): void {
-    this.userService.getUsers().subscribe({
-      next: (users) => {
-        if (users) {
-          this.users = users;
-          this.dataSource = new MatTableDataSource<User>(this.users);
+  getTasks(): void {
+    this.taskService.getTasks().subscribe({
+      next: (tasks) => {
+        if (tasks) {
+          this.tasks = tasks;
+          this.dataSource = new MatTableDataSource<Task>(this.tasks);
           this.dataSource.paginator = this.paginator;
         }
       },
@@ -55,52 +55,52 @@ export class UserListComponent implements OnInit {
 
   /**
    *
-   *Open save user dialog
-   * @memberof UserListComponent
+   *Open save task dialog
+   * @memberof TaskListComponent
    */
-  openSaveUserDialog(userId: string): void {
-    const dialogRef = this.dialog.open(UserComponent, {
+  openaddTaskDialog(taskId?: string): void {
+    const dialogRef = this.dialog.open(TaskComponent, {
       width: '500px',
-      data: userId,
+      data: taskId,
     });
     dialogRef.afterClosed().subscribe((res) => {
       if (res) {
-        this.getUsers();
+        this.getTasks();
       }
     });
   }
 
   /**
    *
-   * Open delete user dialog for confirmation
-   * @param {string} userId
-   * @memberof UserListComponent
+   * Open delete task dialog for confirmation
+   * @param {string} taskId
+   * @memberof TaskListComponent
    */
-  openDeleteUserDialog(userId: string): void {
+  openDeleteTaskDialog(taskId: string): void {
     const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
       width: '500px',
     });
     dialogRef.afterClosed().subscribe((res) => {
       if (res) {
-        this.deleteUser(userId);
+        this.deleteTask(taskId);
       }
     });
   }
 
   /**
    *
-   * Delete user based on userId
-   * @param {string} userId
-   * @memberof UserListComponent
+   * Delete task based on taskId
+   * @param {string} taskId
+   * @memberof TaskListComponent
    */
-  deleteUser(userId: string): void {
-    this.userService.deleteUser(userId).subscribe({
-      next: (users) => {
-        if (users) {
-          this.toast.success('User deleted successfully', 'Success', {
+  deleteTask(taskId: string): void {
+    this.taskService.deleteTask(taskId).subscribe({
+      next: (task) => {
+        if (task) {
+          this.toast.success('Task deleted successfully', 'Success', {
             timeOut: 2000,
           });
-          this.getUsers();
+          this.getTasks();
         }
       },
     });

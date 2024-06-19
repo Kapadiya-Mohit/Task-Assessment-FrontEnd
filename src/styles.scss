@@ -4,4 +4,4 @@
 @import url('./assets/styles/_variables.scss');
 
 html, body { height: 100%;}
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif;background: whitesmoke !important; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif;background: var(--bgColor) !important; }

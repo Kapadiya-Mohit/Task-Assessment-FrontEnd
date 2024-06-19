@@ -7,8 +7,8 @@ export const routes: Routes = [
     loadChildren: () => import('./auth/auth.module').then((m) => m.AuthModule),
   },
   {
-    path: 'user',
-    loadChildren: () => import('./user/user.module').then((m) => m.UserModule),
+    path: 'task',
+    loadChildren: () => import('./task/task.module').then((m) => m.TaskModule),
     canActivate: [authGuard],
   },
 ];

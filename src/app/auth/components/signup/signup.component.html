@@ -1,10 +1,8 @@
-<div class="d-flex align-items-center justify-content-center">
-    <mat-card class="w-75 card mx-auto">
-        <mat-card-header class="d-flex align-items-center justify-content-center">
-            <mat-card-title> Signup</mat-card-title>
-        </mat-card-header>
+<div class="d-flex align-items-center justify-content-center justify-content-lg-start auth-wrap flex-column">
+    <h1 class="mb-10 text-white">Sign Up</h1>
+    <mat-card class="w-50 card">
         <mat-card-content>
-            <form class="w-100 p-10 gap-8 d-flex justify-content-center align-items-center flex-column"
+            <form class="w-100 p-10 gap-10 d-flex justify-content-center align-items-center flex-column"
                 [formGroup]="signupForm">
                 <!-- firstName -->
                 <mat-form-field class="form-field w-75" appearance="outline">
@@ -73,7 +71,7 @@
                     }
                 </mat-form-field>
                 <div class="w-75 mt-10 d-flex justify-content-end button-wrap">
-                    <button mat-raised-button class="bg-dark text-white" (click)="save()">Save</button>
+                    <button mat-raised-button class="btn text-white" (click)="save()">Save</button>
                 </div>
             </form>
         </mat-card-content>

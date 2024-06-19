@@ -2,12 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { Router, RouterOutlet } from '@angular/router';
 import { HeaderComponent } from './shared/components/header/header.component';
 import { AuthService } from './shared/services/auth.service';
+import { FooterComponent } from './shared/components/footer/footer.component';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, HeaderComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
+  imports: [RouterOutlet, HeaderComponent, FooterComponent],
 })
 export class AppComponent implements OnInit {
   title = 'task-assessment-frontEnd';
@@ -17,7 +18,7 @@ export class AppComponent implements OnInit {
     const isUserLoggin = this.authService.isLoggedIn();
     if (isUserLoggin) {
       this.authService.$isLogginUser.next(true);
-      this.router.navigate(['/user']);
+      this.router.navigate(['/task']);
     }
   }
 }

@@ -16,7 +16,6 @@ import { AuthService } from '../../services/auth.service';
 export class HeaderComponent {
   isMobileView: boolean = false;
   isSidebarVisible: boolean = false;
-  sidebarLinks = ['Login', 'Signup', 'Logout'];
   isLoggedUser: boolean = false;
   constructor(
     @Inject(DOCUMENT) private document: Document,
