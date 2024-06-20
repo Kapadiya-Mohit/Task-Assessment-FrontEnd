@@ -20,6 +20,8 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class SignupComponent implements OnInit {
   signupForm!: FormGroup;
+  showPassword = false;
+  fieldTextType = 'password';
 
   constructor(
     private fb: FormBuilder,
@@ -29,15 +31,25 @@ export class SignupComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.initUserForm();
+    this.initSignupForm();
   }
 
   /**
    *
-   *Initialization of user form
+   * Hide and show password visibility
    * @memberof SignupComponent
    */
-  initUserForm(): void {
+  toggleFieldType(): void {
+    this.showPassword = !this.showPassword;
+    this.fieldTextType = this.showPassword ? 'text' : 'password';
+  }
+
+  /**
+   *
+   *Initialization of signup form
+   * @memberof SignupComponent
+   */
+  initSignupForm(): void {
     this.signupForm = this.fb.group({
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
@@ -56,7 +68,7 @@ export class SignupComponent implements OnInit {
 
   /**
    *
-   *Save user form
+   *Save signup form
    * @memberof SignupComponent
    */
   save(): void {

@@ -5,6 +5,7 @@
   min-height: 53px;
   margin-bottom: 20px;
   box-shadow: 0 0 20px rgba(300, 0, 0, 0.1);
+  background-color: var(--darkBlue) !important;
 
   & .icon {
     font-size: 20px;
@@ -13,6 +14,11 @@
   & .navbar-right-wrap {
     display: flex;
     align-items: center;
+
+    .logout-icon {
+      padding: 18px !important;
+      border-radius: 20px !important;
+    }
   }
 }
 
@@ -23,6 +29,7 @@
   transform: translateX(100%);
   transition: right 0.3s ease;
   z-index: 1111;
+  background-color: var(--darkBlue);
 
   & .navbar-nav {
     & .nav-item {

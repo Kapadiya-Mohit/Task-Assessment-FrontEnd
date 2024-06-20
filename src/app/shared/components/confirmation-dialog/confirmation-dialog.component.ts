@@ -17,10 +17,10 @@ export class ConfirmationDialogComponent {
   /**
    *
    * Close dialog after user confirmation
-   * @param {boolean} isDeleteUser
+   * @param {boolean} isDeleteTask
    * @memberof ConfirmationDialogComponent
    */
-  closeDialog(isDeleteUser: boolean): void {
-    this.dialogRef.close(isDeleteUser);
+  closeDialog(isDeleteTask: boolean): void {
+    this.dialogRef.close(isDeleteTask);
   }
 }

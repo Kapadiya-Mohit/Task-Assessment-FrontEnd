@@ -7,19 +7,21 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../../../shared/services/auth.service';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [MaterialModule, FormsModule, ReactiveFormsModule],
+  imports: [MaterialModule, FormsModule, ReactiveFormsModule, RouterModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
 })
 export class LoginComponent implements OnInit {
   loginForm!: FormGroup;
+  showPassword = false;
+  fieldTextType = 'password';
 
   constructor(
     private fb: FormBuilder,
@@ -29,15 +31,25 @@ export class LoginComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.initUserForm();
+    this.initLoginForm();
   }
 
   /**
    *
-   *Initialization of user form
+   * Hide and show password visibility
    * @memberof LoginComponent
    */
-  initUserForm(): void {
+  toggleFieldType(): void {
+    this.showPassword = !this.showPassword;
+    this.fieldTextType = this.showPassword ? 'text' : 'password';
+  }
+
+  /**
+   *
+   *Initialization of login form
+   * @memberof LoginComponent
+   */
+  initLoginForm(): void {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: [
@@ -54,7 +66,7 @@ export class LoginComponent implements OnInit {
 
   /**
    *
-   *Save user form
+   *Save login form
    * @memberof LoginComponent
    */
   save(): void {
@@ -68,7 +80,7 @@ export class LoginComponent implements OnInit {
           });
           this.authService.setJWTToken(res.token);
           this.authService.$isLogginUser.next(true);
-          this.router.navigate(['/user']);
+          this.router.navigate(['/task']);
         }
       },
       error: (err) => this.toast.error(err.error.message),

@@ -1,6 +1,6 @@
-<h2 mat-dialog-title class="d-flex justify-content-center align-items-center mt-10"> User Form</h2>
+<h2 mat-dialog-title class="d-flex justify-content-center align-items-center mt-10"> Task Form</h2>
 <mat-dialog-content>
-    <form class="w-80 p-10" [formGroup]="userForm">
+    <form class="w-80 p-10" [formGroup]="taskForm">
         <!-- Title -->
         <mat-form-field class="form-field w-100 mt-10" appearance="outline">
             <mat-label>Title</mat-label>
@@ -27,9 +27,10 @@
         <mat-form-field class="form-field w-100 mt-10" appearance="outline">
             <mat-label>Status</mat-label>
             <mat-select matInput placeholder="Enter Status" formControlName="status">
-                <mat-option value="Todo">To Do</mat-option>
-                <mat-option value="Inprogress">In Progress</mat-option>
-                <mat-option value="Done">Done</mat-option>
+                <mat-option value="Todo">To Do <mat-icon color="primary">list</mat-icon></mat-option>
+                <mat-option value="Inprogress">In Progress <mat-icon
+                        class="text-warning">hourglass_empty</mat-icon></mat-option>
+                <mat-option value="Done">Done <mat-icon class="text-success">check_circle</mat-icon></mat-option>
             </mat-select>
             @if (
             hasError('description','required')
@@ -40,6 +41,6 @@
     </form>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
-    <button mat-raised-button color="white" (click)="cancelAddUser()">Cancel</button>
-    <button mat-raised-button class="bg-dark text-white" (click)="saveOrUpdateUser()">Save</button>
+    <button mat-raised-button color="white" (click)="cancelAddTask()">Cancel</button>
+    <button mat-raised-button class="bg-primary-wrap text-white" (click)="saveOrUpdateTask()">Save</button>
 </mat-dialog-actions>

@@ -1,8 +1,7 @@
-<div class="d-flex align-items-center justify-content-center login-wrap">
-    <mat-card class="w-75 card">
-        <mat-card-header class="d-flex align-items-center justify-content-center">
-            <mat-card-title> Login</mat-card-title>
-        </mat-card-header>
+<div
+    class="d-flex align-items-center justify-content-center justify-content-lg-start  auth-wrap flex-column position-relative">
+    <h2 class="mb-10 text-white"> <mat-icon>lock_open</mat-icon> Sign In</h2>
+    <mat-card class="w-50 card overflow-auto position-relative">
         <mat-card-content>
             <form class="w-100 gap-10 p-10 d-flex justify-content-center align-items-center flex-column"
                 [formGroup]="loginForm">
@@ -28,7 +27,10 @@
                 <!-- password -->
                 <mat-form-field class="form-field w-75 mt-10" appearance="outline">
                     <mat-label>Password</mat-label>
-                    <input matInput placeholder="Enter Password" formControlName="password">
+                    <input matInput placeholder="Enter Password" formControlName="password" type="{{fieldTextType }}">
+                    <button matSuffix mat-icon-button aria-label="Clear" (click)="toggleFieldType()">
+                        <mat-icon>{{this.showPassword ? 'visibility_off' :'visibility'}}</mat-icon>
+                    </button>
                     @if (
                     hasError('password','required')
                     ) {
@@ -47,7 +49,7 @@
                     }
                 </mat-form-field>
                 <div class="w-75 mt-10 d-flex justify-content-end button-wrap">
-                    <button mat-raised-button class="bg-dark text-white" (click)="save()">Save</button>
+                    <button mat-raised-button class="bg-primary-wrap text-white" (click)="save()">Save</button>
                 </div>
             </form>
         </mat-card-content>
