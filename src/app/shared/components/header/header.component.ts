@@ -5,6 +5,7 @@ import { Component, ElementRef, HostListener, Inject } from '@angular/core';
 import { MaterialModule } from '../../module/material/material.module';
 import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-header',
@@ -21,7 +22,8 @@ export class HeaderComponent {
     @Inject(DOCUMENT) private document: Document,
     private elementRef: ElementRef,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private toast: ToastrService
   ) {}
 
   ngOnInit(): void {
@@ -132,6 +134,9 @@ export class HeaderComponent {
    */
   logoutUser(): void {
     this.authService.logout();
+    this.toast.success('User logout successfully', 'Success', {
+      timeOut: 2000,
+    });
     this.authService.$isLogginUser.next(false);
     this.router.navigate(['/']);
   }

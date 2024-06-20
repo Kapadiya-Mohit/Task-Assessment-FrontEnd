@@ -10,6 +10,13 @@
   overflow: auto;
 }
 
+.mat-mdc-no-data-row {
+  .mat-cell {
+    padding: 20px;
+    text-align: center;
+  }
+}
+
 table {
   width: 100%;
 }

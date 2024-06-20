@@ -83,7 +83,7 @@ export class SignupComponent implements OnInit {
           this.router.navigate(['/']);
         }
       },
-      error: (err) => this.toast.error(err),
+      error: (err) => this.toast.error(err.error.message),
     });
   }
 

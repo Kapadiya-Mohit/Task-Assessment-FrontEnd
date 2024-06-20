@@ -33,7 +33,7 @@
                 <mat-option value="Done">Done <mat-icon class="text-success">check_circle</mat-icon></mat-option>
             </mat-select>
             @if (
-            hasError('description','required')
+            hasError('status','required')
             ) {
             <mat-error><mat-icon class="error-icon">error</mat-icon> Status is required</mat-error>
             }
