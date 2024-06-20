@@ -8,7 +8,7 @@
             @if (
             hasError('title','required')
             ) {
-            <mat-error>Title is required!</mat-error>
+            <mat-error><mat-icon class="error-icon">error</mat-icon> Title is required</mat-error>
             }
         </mat-form-field>
 
@@ -19,7 +19,7 @@
             @if (
             hasError('description','required')
             ) {
-            <mat-error>Description is required!</mat-error>
+            <mat-error><mat-icon class="error-icon">error</mat-icon> Description is required</mat-error>
             }
         </mat-form-field>
 
@@ -35,7 +35,7 @@
             @if (
             hasError('description','required')
             ) {
-            <mat-error>Status is required!</mat-error>
+            <mat-error><mat-icon class="error-icon">error</mat-icon> Status is required</mat-error>
             }
         </mat-form-field>
     </form>
