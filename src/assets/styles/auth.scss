@@ -1,19 +1,8 @@
 /* Ensure the card is responsive */
-.card {
-    position: relative;
-    overflow: auto;
-}
 
 .auth-wrap {
     min-height: 100vh;
     width: 100%;
-    position: relative;
-
-    .button-wrap {
-        .btn {
-            background-color: var(--darkBlue);
-        }
-    }
 }
 
 /* Adjust the form fields and card content on small screens */

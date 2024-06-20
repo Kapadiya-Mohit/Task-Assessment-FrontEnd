@@ -20,6 +20,8 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class LoginComponent implements OnInit {
   loginForm!: FormGroup;
+  showPassword = false;
+  fieldTextType = 'password';
 
   constructor(
     private fb: FormBuilder,
@@ -30,6 +32,16 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.initLoginForm();
+  }
+
+  /**
+   *
+   * Hide and show password visibility
+   * @memberof LoginComponent
+   */
+  toggleFieldType(): void {
+    this.showPassword = !this.showPassword;
+    this.fieldTextType = this.showPassword ? 'text' : 'password';
   }
 
   /**

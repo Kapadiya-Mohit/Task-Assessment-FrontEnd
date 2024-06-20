@@ -94,10 +94,20 @@ $widthsInPx: 1000;
     cursor: pointer;
 }
 
+// error icon
 .error-icon {
     vertical-align: middle;
     margin-right: 4px;
     color: var(--primary)
-      /* or any color you prefer */
-  }
-  
+        /* or any color you prefer */
+}
+
+// primary background color
+.bg-primary-wrap {
+    background-color: var(--darkBlue) !important;
+}
+
+// primary text color
+.text-primary-wrap {
+    color: var(--darkBlue) !important;
+}

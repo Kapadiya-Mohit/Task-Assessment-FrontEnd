@@ -48,9 +48,21 @@ export class TaskListComponent implements OnInit {
           this.tasks = tasks;
           this.dataSource = new MatTableDataSource<Task>(this.tasks);
           this.dataSource.paginator = this.paginator;
+          this.dataSource.sort = this.sort;
         }
       },
     });
+  }
+
+  /**
+   *
+   * Search task
+   * @param {Event} event
+   * @memberof TaskListComponent
+   */
+  searchTask(event: Event): void {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
   /**

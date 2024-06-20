@@ -15,7 +15,8 @@
                     <a class="nav-link d-flex align-items-center gap-10">
                         <div class="mr-2 d-flex align-items-center gap-10">
                             @if(isLoggedUser){
-                                <mat-icon (click)="logoutUser()" class="text-white pointer">exit_to_app</mat-icon>
+                            <mat-icon (click)="logoutUser()"
+                                class="text-dark pointer bg-white text-dark logout-icon p-15 rounded d-flex align-items-center justify-content-center">exit_to_app</mat-icon>
                             } @else {
                             <button mat-raised-button color="white" [routerLink]="['/']">Login</button>
                             <button mat-raised-button color="white" [routerLink]="['/signup']">Signup</button>
@@ -30,7 +31,7 @@
 </nav>
 
 <!-- In Mobile View -->
-<div id="sidebar" class="sidebar bg-dark position-fixed top-0 right-0 h-100 p-20">
+<div id="sidebar" class="sidebar position-fixed top-0 right-0 h-100 p-20">
     <div>
         <mat-icon class="fw-bold text-white">close</mat-icon>
     </div>

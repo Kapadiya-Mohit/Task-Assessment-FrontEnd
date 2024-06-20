@@ -2,12 +2,13 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Task } from '../modal/task.modal';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class TaskService {
-  apiUrl = 'http://127.0.0.1:3000/user';
+  private apiUrl = environment.apiUrl;
   constructor(private http: HttpClient) {}
 
   /**
